@@ -4,14 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes; // Import the soft delete trait
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Camps extends Model
+class Checkout extends Model
 {
     use HasFactory, softDeletes;
 
     protected $fillable = [
-        'title',
-        'price'
+        'user_id',
+        'camp_id',
+        'card_number',
+        'expired',
+        'cvv',
+        'is_paid'
     ];
 }
