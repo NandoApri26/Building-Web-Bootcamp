@@ -18,7 +18,7 @@ class CreateCampBenefitsTable extends Migration
 
             // Step 1 relation on table
             // $table->unsignedBigInteger('camp_id');
-            $table->foreignId('camp_id')->constrained(); // foreign key constraint to camps table, if camp is deleted, all its benefits will be deleted as well
+            $table->foreignId('camp_id')->constrained();
             $table->string('name');
             $table->timestamps();
 
