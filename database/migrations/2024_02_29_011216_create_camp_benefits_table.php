@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\Camp;
 
 class CreateCampBenefitsTable extends Migration
 {
@@ -18,7 +19,7 @@ class CreateCampBenefitsTable extends Migration
 
             // Step 1 relation on table
             // $table->unsignedBigInteger('camp_id');
-            $table->foreignId('camp_id')->constrained();
+            $table->foreignIdFor(Camp::class)->constrained();
             $table->string('name');
             $table->timestamps();
 
