@@ -18,11 +18,11 @@ class CreateCheckoutsTable extends Migration
     {
         Schema::create('checkouts', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class)->constrained();
-            $table->foreignIdFor(Camp::class)->constrained();
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('camp_id')->constrained();
             $table->string('card_number', 20);
             $table->date('expired');
-            $table->string('cvv', 3);
+            $table->string('cvc', 3);
             $table->boolean('is_paid')->default(false);
             $table->timestamps();
             $table->softDeletes(); // soft delete
