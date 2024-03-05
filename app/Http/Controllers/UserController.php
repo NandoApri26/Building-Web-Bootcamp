@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+use App\Mail\User\AfterRegister;
 
 class UserController extends Controller
 {
@@ -30,7 +32,12 @@ class UserController extends Controller
         ];
 
         // firstOrCreate if created new data then no created is new data
-        $user = User::firstOrCreate(['email' => $data['email']], $data);
+//        $user = User::firstOrCreate(['email' => $data['email']], $data);
+        $user = User::whereEmail($data['email'])->first();
+        if (!$user) {
+            $user = User::create($data);
+            Mail::to($user->email)->send(new AfterRegister($user));
+        }
         Auth::login($user, true);
 
         return redirect(route('index'));
