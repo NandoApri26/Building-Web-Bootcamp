@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Http\Requests\User\Checkout\Store;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\User\Checkout\Store;
+use Illuminate\Support\Facades\Mail;
 use App\Models\Checkout;
 use App\Models\Camp;
+use App\Mail\Checkout\AfterCheckout;
 
 class CheckoutController extends Controller
 {
@@ -60,49 +62,25 @@ class CheckoutController extends Controller
         // Create Checkout
         $checkout = Checkout::create($data);
 
+        // Sending Email
+        Mail::to(Auth::user()->email)->send(new AfterCheckout($checkout));
+
         return redirect(route('checkout.success'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Checkout  $checkout
-     * @return \Illuminate\Http\Response
-     */
     public function show(Checkout $checkout)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Checkout  $checkout
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Checkout $checkout)
     {
         //
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Checkout  $checkout
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Checkout $checkout)
     {
         //
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Checkout  $checkout
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Checkout $checkout)
     {
         //
@@ -111,5 +89,10 @@ class CheckoutController extends Controller
     public function success()
     {
         return view('checkout.success');
+    }
+
+    public function invoice(Checkout $checkout)
+    {
+        return $checkout;
     }
 }
