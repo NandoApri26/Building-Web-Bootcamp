@@ -1,11 +1,12 @@
 @component('mail::message')
-    # Welcome
+    # Register Camp: {{ $checkout->Camp->title }}
 
-    Hi, {{ $user->name }}!
-    Welcome to Bootcamp, your account has been created successfully. Now you can choose your favorite courses and start learning.
+    Hi, {{ $checkout->User->name }}!
 
-@component('mail::button', ['url' => route('login')])
-Login Here!
+    Thank you for register on <b>{{ $checkout->Camp->title }}</b>,  please payment instruction by click the button below.
+
+@component('mail::button', ['url' => route('user.checkout.invoice', $checkout->id)])
+Get Invoice!!!
 @endcomponent
 
 Thanks,<br>
