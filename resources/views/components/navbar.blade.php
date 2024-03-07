@@ -25,7 +25,11 @@
                 <div class="d-flex user-logged nav-item dropdown no-arrow">
                     <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                         Halo, {{ Auth::user()->name }}
-                        <img src="{{ Auth::user()->avatar }}" class="user-photo rounded-circle" alt="">
+                        @if(Auth::user()->avatar)
+                            <img src="{{ Auth::user()->avatar }}" class="user-photo rounded-circle" alt="">
+                        @else
+                            <img src="https://ui-avatars.com/api/?name=Admin" class="user-photo rounded-circle" alt="">
+                        @endif
 
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="right: 0; left: auto">
                             <li>
@@ -44,10 +48,10 @@
                 </div>
             @else
                 <div class="d-flex">
-                    <a href="{{ route('login') }}" class="btn btn-master btn-secondary me-3">
+                    <a href="{{ route('/login') }}" class="btn btn-master btn-secondary me-3">
                         Sign In
                     </a>
-                    <a href="{{ route('login') }}" class="btn btn-master btn-primary">
+                    <a href="{{ route('/login') }}" class="btn btn-master btn-primary">
                         Sign Up
                     </a>
                 </div>
