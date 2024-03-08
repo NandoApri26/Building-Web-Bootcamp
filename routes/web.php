@@ -33,7 +33,7 @@ Route::middleware(['auth'])->group(function () {
    });
 
     // Admin Route
-    Route::prefix('/admin/dashboard')->namespace('Admin')->name('admin.')->middleware('ensureUserRole:admin')->group(function (){
+    Route::prefix('/admin/dashboard')->name('admin.')->middleware('ensureUserRole:admin')->group(function (){
         Route::get('/', [AdminDashboard::class, 'index'])->name('dashboard');
     });
 
