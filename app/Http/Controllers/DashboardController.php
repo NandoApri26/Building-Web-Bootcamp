@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Checkout;
 
 
 class DashboardController extends Controller
@@ -13,10 +12,10 @@ class DashboardController extends Controller
     {
         switch (Auth::user()->is_admin) {
             case true:
-                return redirect(route('admin..dashboard'));
+                return redirect(route('admin.dashboard'));
                 break;
             default:
-                return redirect(route('user..dashboard'));
+                return redirect(route('user.dashboard'));
                 break;
         }
     }
